@@ -1,0 +1,398 @@
+= Spring Boot中使用Swagger2构建RESTful APIs 并使用aop记录对于操作日志
+
+
+[[_overview]]
+== Overview
+更多Spring Boot相关文章请关注：http://blog.xxx.com/
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 程序猿xxx
+
+
+=== License information
+[%hardbreaks]
+__Terms of service__ : http://blog.xxx.com/
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8080
+__BasePath__ : /
+
+
+=== Tags
+
+* swagger2 Demo接口 : Greeting Controller
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_greetingusingpost]]
+=== 遇见用户
+....
+POST /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusingget]]
+=== 遇见用户
+....
+GET /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusingput]]
+=== 遇见用户
+....
+PUT /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusingdelete]]
+=== 遇见用户
+....
+DELETE /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusingpatch]]
+=== 遇见用户
+....
+PATCH /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusinghead]]
+=== 遇见用户
+....
+HEAD /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+[[_greetingusingoptions]]
+=== 遇见用户
+....
+OPTIONS /greeting
+....
+
+
+==== Description
+根据用户打招呼
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**name** +
+__optional__|name|string|`"World"`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_greeting,Greeting>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* swagger2 Demo接口
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_greeting]]
+=== Greeting
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**content** +
+__optional__|string
+|**id** +
+__optional__|integer (int64)
+|===
+
+
+
+
+

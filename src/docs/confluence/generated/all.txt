@@ -1,0 +1,329 @@
+h1. Spring Boot中使用Swagger2构建RESTful APIs 并使用aop记录对于操作日志
+
+
+h2. Overview {anchor:overview}
+更多Spring Boot相关文章请关注：http://blog.xxx.com/
+
+
+h3. Version information
+_Version_ : 1.0
+
+
+h3. Contact information
+_Contact_ : 程序猿xxx
+
+
+h3. License information
+_Terms of service_ : http://blog.xxx.com/
+
+
+h3. URI scheme
+_Host_ : localhost:8080\\ 
+_BasePath_ : /
+
+
+h3. Tags
+
+* swagger2 Demo接口 : Greeting Controller
+
+
+
+
+h2. Paths {anchor:paths}
+
+h3. 遇见用户 {anchor:greetingusingpost}
+{noformat}
+POST /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*201*||Created||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+|*404*||Not Found||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusingget}
+{noformat}
+GET /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+|*404*||Not Found||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusingput}
+{noformat}
+PUT /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*201*||Created||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+|*404*||Not Found||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusingdelete}
+{noformat}
+DELETE /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*204*||No Content||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusingpatch}
+{noformat}
+PATCH /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*204*||No Content||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusinghead}
+{noformat}
+HEAD /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*204*||No Content||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+h3. 遇见用户 {anchor:greetingusingoptions}
+{noformat}
+OPTIONS /greeting
+{noformat}
+
+
+h4. Description
+根据用户打招呼
+
+
+h4. Parameters
+
+||Type||Name||Description||Schema||Default||
+|*Query*|*name*\\ \\ _optional_||name||string||{noformat}"World"{noformat}|
+
+
+h4. Responses
+
+||HTTP Code||Description||Schema||
+|*200*||OK||[Greeting|#greeting]|
+|*204*||No Content||No Content|
+|*401*||Unauthorized||No Content|
+|*403*||Forbidden||No Content|
+
+
+h4. Consumes
+
+* {noformat}application/json{noformat}
+
+
+h4. Produces
+
+* {noformat}*/*{noformat}
+
+
+h4. Tags
+
+* swagger2 Demo接口
+
+
+
+
+h2. Definitions {anchor:definitions}
+
+h3. Greeting {anchor:greeting}
+
+||Name||Schema||
+|*content*\\ \\ _optional_||string|
+|*id*\\ \\ _optional_||integer (int64)|
+
+
+
+
+

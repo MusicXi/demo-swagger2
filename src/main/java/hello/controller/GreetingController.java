@@ -1,6 +1,6 @@
 package hello.controller;
 
-import hello.Greeting;
+import hello.bean.Greeting;
 import hello.bean.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -151,16 +151,16 @@ public class SystemLogAspect {
     	log.setTimeout(DateUtils.formatDateTime(endTime - beginTime));
 
     	 //1.直接执行保存操作
-        //this.logService.createSystemLog(log);
+        //this.logService.createLog(log);
 
         //2.优化:异步保存日志
-        //new SaveLogThread(log, logService).start();
+        new Thread(new SaveLogThread(log, logService)).start();
 
         //3.再优化:通过线程池来执行日志保存
         //threadPoolTaskExecutor.execute(new SaveLogThread(log, logService));
     	
     	// 演示直接打印
-    	System.out.println(log);
+    	//System.out.println(log);
     	
     	
         logThreadLocal.set(log);

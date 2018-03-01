@@ -74,26 +74,6 @@ public class GreetingController {
 }
 ```
 
-6.国际化实现
-国际化文件位于springfox-swagger-ui-2.7.0.jar/META-INF/resources/webjars/springfox-swagger-ui/lang目录中
-翻译支持：
-swagger的index.html(swagger-ui.html) 中添加
-
-```
-	<!--国际化操作：选择中文版 -->
-    <script src='webjars/springfox-swagger-ui/lang/translator.js' type='text/javascript'></script>
-    <script src='webjars/springfox-swagger-ui/lang/zh-cn.js' type='text/javascript'></script>
-
-```
-- 添加 src/main/resources/META-INF/resources/swagger-ui.html
-- 复制swaager-ui jar包中  /META-INF/resources/swagger-ui.html的内容
-- 在新建的swagger-ui.html补充插入以下js,访问http://localhost:8080/swagger-ui.html 就是开启中文的UI界面
-```
-	<!--国际化操作：选择中文版 -->
-    <script src='webjars/springfox-swagger-ui/lang/translator.js' type='text/javascript'></script>
-    <script src='webjars/springfox-swagger-ui/lang/zh-cn.js' type='text/javascript'></script>
-
-```
 
 5. 参考文档
 - Spring Boot中使用Swagger2构建强大的RESTful API文档  https://www.jianshu.com/p/8033ef83a8ed 
@@ -101,7 +81,7 @@ swagger的index.html(swagger-ui.html) 中添加
 - 作者博客(重点关注) http://blog.didispace.com/springbootswagger2/
 
 
-- SpringBoot 使用Swagger2打造在线接口文档（附汉化教程）https://www.jianshu.com/p/7e543f0f0bd8
+
 
 
 

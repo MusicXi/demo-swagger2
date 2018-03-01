@@ -1,4 +1,4 @@
-package hello;
+package hello.controller;
 
 import hello.bean.User;
 import io.swagger.annotations.Api;

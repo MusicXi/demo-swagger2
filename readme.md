@@ -1,6 +1,7 @@
 # springboot实现swagger2接口文档
 - 快速尝试:http://localhost:8080/greeting?name=User
-- 接口文档:http://host:port/xxx/swagger-ui.html (生成的接口都是默认的)
+- 接口文档:http://localhost:8080/swagger-ui.html 
+- 格式:http://host:port/xxx/swagger-ui.html (生成的接口都是默认的)
 1. 构建基础springboot restful项目 
 2. 引入依赖swagger2及swagger2 UI
 ```

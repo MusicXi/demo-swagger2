@@ -74,11 +74,17 @@ public class GreetingController {
 }
 ```
 
+5. 待实现功能
+- 支持pdf导出
+- 下载离线文档
+- 命令maven确认
 
-5. 参考文档
+6. 参考文档
 - Spring Boot中使用Swagger2构建强大的RESTful API文档  https://www.jianshu.com/p/8033ef83a8ed 
 - 翟永超 《Spring Cloud微服务实战》作者 Spring4All社区联合发起人 
 - 作者博客(重点关注) http://blog.didispace.com/springbootswagger2/
+- 《使用Swagger2Markup实现API文档的静态部署（一）》 https://blog.csdn.net/qq_34368762/article/details/79129303
+- 《使用Swagger2Markup实现API文档的静态部署（二）：Markdown和Confluence》 https://blog.csdn.net/qq_35873847/article/details/79191971
 
 
 

@@ -4,6 +4,7 @@ import hello.bean.Log;
 import hello.service.LogService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,12 @@ public class LogServiceImpl  implements LogService{
 		System.out.println("模拟日志更新"+log);
 		Logs.put(log.getLogId(), log);
 		return 1;
+	}
+
+	@Override
+	public List<Log> listLogs() {
+	
+		return null;
 	}
 
 

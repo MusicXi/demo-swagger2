@@ -6,8 +6,8 @@
 - 格式:http://host:port/xxx/swagger-ui.html (生成的接口都是默认的)
 
 
-### 参考文档
-[springboot实现swagger2接口文档](https://github.com/MusicXi/note/tree/master/java/third_lib/swagger2)
+### 相关文档
+1. [springboot/springmvc实现swagger2/及国际化](https://github.com/MusicXi/note/tree/master/java/third_lib/swagger2)
 
 
 

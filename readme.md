@@ -7,7 +7,7 @@
 
 
 ### 参考文档
-[springboot实现swagger2接口文档](https://github.com/MusicXi/demo-swagger2/tree/master/doc/springboot实现swagger2接口文档.md)
+[springboot实现swagger2接口文档](https://github.com/MusicXi/note/tree/master/java/third_lib/swagger2)
 
 
 

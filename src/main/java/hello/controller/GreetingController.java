@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @ApiOperation(value="遇见用户", notes="根据用户打招呼")
-    @RequestMapping("/greeting")
+    @RequestMapping(value="/greeting" ,method= RequestMethod.GET)
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name, HttpSession session) {
     	// 模拟用户登入
     	User user = new User();

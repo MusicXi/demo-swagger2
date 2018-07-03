@@ -5,10 +5,12 @@ import io.github.swagger2markup.Swagger2MarkupConverter;
 import io.github.swagger2markup.builder.Swagger2MarkupConfigBuilder;
 import io.github.swagger2markup.markup.builder.MarkupLanguage;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+import org.asciidoctor.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -81,5 +83,7 @@ public class DemoApplicationTests {
 				//.toFolder(Paths.get("src/docs/confluence/generated"));
 				.toFile(Paths.get("src/docs/confluence/generated/all"));
 	}
+
+
 
 }

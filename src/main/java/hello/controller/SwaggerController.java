@@ -22,24 +22,30 @@ import java.net.URISyntaxException;
 public class SwaggerController {
 
     @RequestMapping(value = "/markdown", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadFile(Long id)
+    public ResponseEntity<InputStreamResource> downloadFile()
             throws IOException {
         return SwaggerApiDocUtils.downloadApiDoc(ApiDocTypeEnum.MARKDOWN);
     }
     @RequestMapping(value = "/confluence", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadConfluence(Long id)
+    public ResponseEntity<InputStreamResource> downloadConfluence()
             throws IOException {
         return SwaggerApiDocUtils.downloadApiDoc(ApiDocTypeEnum.CONFLUENCE);
     }
     @RequestMapping(value = "/asciidoc", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadAsciidoc(Long id)
+    public ResponseEntity<InputStreamResource> downloadAsciidoc()
             throws IOException {
         return SwaggerApiDocUtils.downloadApiDoc(ApiDocTypeEnum.ASCIIDOC);
     }
 
     @RequestMapping(value = "/json", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadJsondoc(Long id)
+    public ResponseEntity<InputStreamResource> downloadJsondoc()
             throws Exception {
-        return SwaggerApiDocUtils.downloadApiDocJson(ApiDocTypeEnum.ASCIIDOC);
+        return SwaggerApiDocUtils.downloadApiDocJson();
+    }
+
+    @RequestMapping(value = "/html", method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> downloadHtmldoc()
+            throws Exception {
+        return SwaggerApiDocUtils.downloadHtmlDoc();
     }
 }

@@ -59,6 +59,20 @@
 			<version>${swagger2markup.version}</version>
 		</dependency>
 
+		<!--使用Java代码生成html-->
+		<dependency>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctorj</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<!--使用Java代码生成pdf  中文会丢失体验不好不用
+		<dependency>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctorj-pdf</artifactId>
+			<version>1.5.0-alpha.16</version>
+		</dependency>
+		-->
+
 		<!-- 工具类需要jar包 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -69,6 +83,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<rpm.install.path>/usr/soft/app</rpm.install.path>
+		<rpm.prefix>/usr/soft/app</rpm.prefix>
 		<springfox-swagger2.version>2.7.0</springfox-swagger2.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<swagger2markup.version>1.3.1</swagger2markup.version>
@@ -98,6 +114,101 @@
 					</attributes>
 				</configuration>
 			</plugin>
+
+			<!-- 打包RPM包: mvn package -Dmaven.test.skip=true   -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.1.5</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>rpm</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<prefix>${rpm.prefix}</prefix><!-- tomcat目录  -->
+					<copyright>2018, wwww.quansucloud.com</copyright>
+					<distribution>quangsucloud</distribution>
+					<group>quangsucloud.com</group>
+					<packager>linrx</packager>
+					<version>${project.version}</version>
+					<autoRequires>true</autoRequires>
+					<release>3</release>
+					<requires>
+						<require>java-1.7.0 >= 1.7</require>
+					</requires>
+					<mappings>
+						<mapping>
+							<!-- 安装rpm后指向的服务器安装目录  -->
+							<directory>${rpm.install.path}/${project.artifactId}</directory>
+							<filemode>755</filemode>
+							<username>root</username>
+							<groupname>root</groupname>
+							<sources>
+								<source>
+									<location>target/${project.artifactId}-${project.version}.jar</location>
+								</source>
+							</sources>
+						</mapping>
+						<!-- 复制安装相关脚本命令-->
+						<mapping>
+							<directory>${rpm.install.path}/${project.artifactId}/bin</directory>
+							<filemode>750</filemode>
+							<username>root</username>
+							<groupname>root</groupname>
+							<sources>
+								<source>
+									<location>src/bin</location>
+								</source>
+							</sources>
+						</mapping>
+
+						<!--配置软连接起停项目,相当于命令:ln -sf myapp.jar /etc/init.d/myapp)
+							启动: systemctl start myapp
+							停止: systemctl stop myapp
+							重启: systemctl restart myapp
+							查看日志: journalctl -u myapp-->
+						<mapping>
+							<directory>/etc/init.d</directory>
+							<filemode>750</filemode>
+							<username>root</username>
+							<groupname>root</groupname>
+							<sources>
+								<softlinkSource>
+									<location>${rpm.install.path}/${project.artifactId}/${project.artifactId}-${project.version}.jar</location>
+									<destination>${project.artifactId}</destination>
+								</softlinkSource>
+							</sources>
+						</mapping>
+					</mappings>
+					<preinstallScriptlet>
+						<script>echo "installing ${project.name} now"</script>
+					</preinstallScriptlet>
+					<postinstallScriptlet>
+						<!-- 通过软链接 配置"service demo-swagger2 " 相关操作命令启动-->
+						<!-- 使用上面softlinkSource配置替代
+						<script>
+							rm -f /etc/init.d/${project.artifactId};
+							ln -sf ${rpm.install.path}/${project.artifactId}/bin/startup.sh /etc/init.d/demo-swagger2;
+						</script>
+						-->
+					</postinstallScriptlet>
+					<preremoveScriptlet>
+						<script>
+							<!--rm -f /etc/init.d/${project.artifactId};-->
+							echo "uninstalling ${project.name} success";
+						</script>
+						<!--
+						<scriptFile>src/main/scripts/preremove</scriptFile>
+						<fileEncoding>utf-8</fileEncoding>
+						-->
+					</preremoveScriptlet>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 

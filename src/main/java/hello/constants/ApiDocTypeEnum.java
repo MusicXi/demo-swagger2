@@ -9,7 +9,7 @@ import io.github.swagger2markup.markup.builder.MarkupLanguage;
 public enum ApiDocTypeEnum {
     MARKDOWN(MarkupLanguage.MARKDOWN, "src/docs/markdown/generated/api_doc_markdown"),
     CONFLUENCE(MarkupLanguage.CONFLUENCE_MARKUP, "src/docs/confluence/generated/api_doc_confluence"),
-    ASCIIDOC(MarkupLanguage.CONFLUENCE_MARKUP, "src/docs/asciidoc/generated/api_doc_asciidoc");
+    ASCIIDOC(MarkupLanguage.ASCIIDOC, "src/docs/asciidoc/generated/api_doc_asciidoc");
 
 
     private MarkupLanguage markupLanguage;
@@ -20,6 +20,10 @@ public enum ApiDocTypeEnum {
         this.toFile = toFile;
     }
 
+    /**
+     * 生成接口文件的路径
+     * @return
+     */
     public String  getDocFile() {
         return this.toFile + this.markupLanguage.getFileNameExtensions().get(0);
     }

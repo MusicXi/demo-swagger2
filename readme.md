@@ -12,6 +12,7 @@ http://localhost:8080/swagger/markdown
 http://localhost:8080/swagger/confluence
 http://localhost:8080/swagger/asciidoc
 http://localhost:8080/swagger/json
+http://localhost:8080/swagger/html
 ```
 
 ### 相关文档

@@ -130,7 +130,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<prefix>${rpm.prefix}</prefix><!-- tomcat目录  -->
+					<prefix>${rpm.prefix}</prefix>
 					<license>2018, wwww.myron.com</license>
 					<distribution>myron</distribution>
 					<group>myron.com</group>

@@ -1,5 +1,5 @@
 # 说明
-- 快速尝试:http://localhost:8080/greeting?name=User
+- 快速尝试:http://localhost:8080/login?name=User
 - 接口文档:http://localhost:8080/swagger-ui.html 
 - http://localhost:8080/v2/api-docs?group=default
 - http://{服务启动主机地址}:{服务启动端口}/v2/api-docs?group={需要生成的api所属组name}

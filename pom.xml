@@ -130,7 +130,7 @@
 				</executions>
 				<configuration>
 					<prefix>${rpm.prefix}</prefix><!-- tomcat目录  -->
-					<copyright>2018, wwww.quansucloud.com</copyright>
+					<license>2018, wwww.quansucloud.com</license>
 					<distribution>quangsucloud</distribution>
 					<group>quangsucloud.com</group>
 					<packager>linrx</packager>

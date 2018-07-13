@@ -13,7 +13,8 @@ import java.util.Map;
  */
 public class Log implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	public static final String TYPE_INFO = "info";
+	public static final String TYPE_ERROR = "error";
 	private String logId;			//日志主键	
 	private String type;			//日志类型	
 	private String title;			//日志标题	

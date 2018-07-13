@@ -44,11 +44,8 @@ public class SystemLogAspect {
 	private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect. class);
 	/**用户session key 正式环境从配置文件中取,这里仅作为演示*/
 	private static final String SESSION_USER_KEY = "user";
-	private static final ThreadLocal<Date> beginTimeThreadLocal =
-			new NamedThreadLocal<Date>("ThreadLocal beginTime");
-	private static final ThreadLocal<Log> logThreadLocal = 
-			new NamedThreadLocal<Log>("ThreadLocal log");
-	
+	private static final ThreadLocal<Date> beginTimeThreadLocal = new NamedThreadLocal<Date>("ThreadLocal beginTime");
+	private static final ThreadLocal<Log> logThreadLocal = new NamedThreadLocal<Log>("ThreadLocal log");
 	private static final ThreadLocal<User> currentUser=new NamedThreadLocal<>("ThreadLocal user");
 	
 	@Autowired(required=false)
@@ -60,23 +57,9 @@ public class SystemLogAspect {
 	@Autowired
 	private LogService logService;
 
-	/**
-	 * Service层切点 
-	 */
-/*	@Pointcut("@annotation(com.myron.ims.annotation.SystemServiceLog)")
-	public void serviceAspect(){}*/
-	
-	/**
-	 * Controller层切点 注解拦截
-	 */
+	/**Controller层切点 注解拦截*/
 	@Pointcut("@annotation(io.swagger.annotations.ApiOperation)")
 	public void controllerAspect(){}
-	
-	/**
-	 * 方法规则拦截
-	 */
-//	@Pointcut("execution(* com.myron.ims.controller.*.*(..))")
-//	public void controllerPointerCut(){}
 
 	/**
 	 * 前置通知 用于拦截Controller层记录用户的操作的开始时间
@@ -92,10 +75,8 @@ public class SystemLogAspect {
 	        logger.debug("开始计时: {}  URI: {}", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
 	        	.format(beginTime), request.getRequestURI());
 		}
-		
 		//读取session中的用户 
 		currentUser.set(this.getCurrentUser(request));
-
 	}
 	
 	/**
@@ -115,7 +96,7 @@ public class SystemLogAspect {
 		Log log=new Log();
 		log.setLogId(UuidUtils.creatUUID());
 		log.setTitle(getControllerMethodDescription2(joinPoint));
-		log.setType("info");
+		log.setType(Log.TYPE_INFO);
 		log.setRemoteAddr(request.getRemoteAddr());
 		log.setRequestUri(request.getRequestURI());
 		log.setMethod(request.getMethod());
@@ -159,7 +140,7 @@ public class SystemLogAspect {
 	public  void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
 		Log log = logThreadLocal.get();
 		if(log != null){
-			log.setType("error");
+			log.setType(Log.TYPE_ERROR);
 			log.setException(e.toString());
 			new UpdateLogThread(log, logService).start();			
 		}

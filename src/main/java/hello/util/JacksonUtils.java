@@ -1,6 +1,7 @@
 package hello.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -39,10 +40,14 @@ public class JacksonUtils {
     /**
      * javaBean、列表数组转换为json字符串,忽略空值
      */
-    public static String obj2jsonIgnoreNull(Object obj) throws Exception {
+    public static String obj2jsonIgnoreNull(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return mapper.writeValueAsString(obj);
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("对象转json错误:" + e.getMessage(), e);
+        }
     }
 
     /**

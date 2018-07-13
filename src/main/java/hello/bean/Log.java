@@ -82,9 +82,10 @@ public class Log implements Serializable{
     }
     
 	/**
-	 * 设置请求参数
+	 * 设置请求参数 // 使用buildRequestParams更好 可以获取请求体中的参数
 	 * @param paramMap
 	 */
+	@Deprecated
 	public void setMapToParams(Map<String, String[]> paramMap) {
 		if (paramMap == null){
 			return;

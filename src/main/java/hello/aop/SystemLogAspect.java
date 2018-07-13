@@ -4,11 +4,15 @@ import hello.bean.Log;
 import hello.bean.User;
 import hello.service.LogService;
 import hello.util.DateUtils;
+import hello.util.JacksonUtils;
+import hello.util.StringUtils;
 import hello.util.UuidUtils;
 import io.swagger.annotations.ApiOperation;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -27,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 系统日志切点类
@@ -70,8 +75,9 @@ public class SystemLogAspect {
 	/**
 	 * 方法规则拦截
 	 */
-	@Pointcut("execution(* com.myron.ims.controller.*.*(..))")
-	public void controllerPointerCut(){}
+//	@Pointcut("execution(* com.myron.ims.controller.*.*(..))")
+//	public void controllerPointerCut(){}
+
 	/**
 	 * 前置通知 用于拦截Controller层记录用户的操作的开始时间
 	 * @param joinPoint 切点
@@ -106,25 +112,21 @@ public class SystemLogAspect {
     	    	return;
     	    }
         }
-        Object [] args = joinPoint.getArgs();
-        System.out.println(args);
-        
-    	String title="";
-    	String type="info";						  //日志类型(info:入库,error:错误)
-    	String remoteAddr=request.getRemoteAddr();//请求的IP
-    	String requestUri=request.getRequestURI();//请求的Uri
-    	String method=request.getMethod();		  //请求的方法类型(post/get)
-    	Map<String,String[]> params=request.getParameterMap(); //请求提交的参数
-    	try {
-    		title=getControllerMethodDescription2(joinPoint);
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    	}    
-    	
-    	//得到线程绑定的局部变量--获取前置通知设置的开始时间
-    	long beginTime = beginTimeThreadLocal.get().getTime();  
-    	long endTime = System.currentTimeMillis(); 
-    	
+		Log log=new Log();
+		log.setLogId(UuidUtils.creatUUID());
+		log.setTitle(getControllerMethodDescription2(joinPoint));
+		log.setType("info");
+		log.setRemoteAddr(request.getRemoteAddr());
+		log.setRequestUri(request.getRequestURI());
+		log.setMethod(request.getMethod());
+		log.setParams(this.buildRequestParams(request.getParameterMap(), joinPoint.getArgs()));
+		log.setUserId(user.getId());
+		//得到线程绑定的局部变量--获取前置通知设置的开始时间
+		log.setOperateDate(beginTimeThreadLocal.get());
+		long beginTime = beginTimeThreadLocal.get().getTime();
+		long endTime = System.currentTimeMillis();
+		log.setTimeout(DateUtils.formatDateTime(System.currentTimeMillis() - beginTimeThreadLocal.get().getTime()));
+
     	// debu模式下打印JVM信息。
 		if (logger.isDebugEnabled()){
 	        logger.debug("计时结束：{}  URI: {}  耗时： {}   最大内存: {}m  已分配内存: {}m  已分配内存中的剩余空间: {}m  最大可用内存: {}m",
@@ -136,36 +138,16 @@ public class SystemLogAspect {
 					Runtime.getRuntime().freeMemory()/1024/1024, 
 					(Runtime.getRuntime().maxMemory()-Runtime.getRuntime().totalMemory()+Runtime.getRuntime().freeMemory())/1024/1024); 
 		}
-    	
-    	Log log=new Log();
-    	log.setLogId(UuidUtils.creatUUID());
-    	log.setTitle(title);
-    	log.setType(type);
-    	log.setRemoteAddr(remoteAddr);
-    	log.setRequestUri(requestUri);
-    	log.setMethod(method);
-    	log.setMapToParams(params);
-    	log.setUserId(user.getId());
-    	Date operateDate=beginTimeThreadLocal.get();
-    	log.setOperateDate(operateDate);
-    	log.setTimeout(DateUtils.formatDateTime(endTime - beginTime));
 
     	 //1.直接执行保存操作
         //this.logService.createLog(log);
-
         //2.优化:异步保存日志
         new Thread(new SaveLogThread(log, logService)).start();
-
         //3.再优化:通过线程池来执行日志保存
         //threadPoolTaskExecutor.execute(new SaveLogThread(log, logService));
-    	
     	// 演示直接打印
     	//System.out.println(log);
-    	
-    	
         logThreadLocal.set(log);
-       
- 
 	}
 	
 	/**
@@ -210,6 +192,37 @@ public class SystemLogAspect {
 	}
 
 	/**
+	 * 构建请求参数
+	 * <ul>
+	 * <li>优先获取request中的请求参数,使用于get等方法</li>
+	 * <li>request中无参数时,获取连接点参数,间接获取post类型请求体参数</li>
+	 * </ul>
+	 * @param paramMap request.getParameterMap(); //请求提交的参数
+	 * @param args joinPoint.getArgs(); //连接点获取请求参数
+	 * @return
+	 */
+	private String buildRequestParams(Map<String, String[]> paramMap, Object[] args) {
+		StringBuilder params = new StringBuilder();
+		// post 请求体json参数
+		if (CollectionUtils.isEmpty(paramMap)) {
+			for (Object obj : args) {
+				if(! (obj instanceof Serializable)) {
+					continue;
+				}
+				params.append(JacksonUtils.obj2jsonIgnoreNull(obj));
+			}
+		// get 请求参数
+		} else {
+			for (Map.Entry<String, String[]> param : ((Map<String, String[]>)paramMap).entrySet()){
+				params.append(("".equals(params.toString()) ? "" : "&") + param.getKey() + "=");
+				String paramValue = (param.getValue() != null && param.getValue().length > 0 ? param.getValue()[0] : "");
+				params.append(StringUtils.abbr(StringUtils.endsWithIgnoreCase(param.getKey(), "password") ? "" : paramValue, 100));
+			}
+		}
+		return params.toString();
+	}
+
+	/**
 	 * 保存日志线程
 	 * 
 	 * @author lin.r.x
@@ -251,4 +264,6 @@ public class SystemLogAspect {
 			this.logService.updateLog(log);
 		}
 	}
+
+
 }

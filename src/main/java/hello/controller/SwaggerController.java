@@ -14,6 +14,7 @@ import java.io.Reader;
 import java.net.URISyntaxException;
 
 /**
+ * swagger2 接口文档下载控制器
  * Created by linrx1 on 2018/6/27.
  */
 @Controller

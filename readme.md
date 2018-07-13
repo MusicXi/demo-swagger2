@@ -37,12 +37,14 @@ public class UserController {
 http://localhost:8080/login?name=User
 ```
 2. 访问接口在线文档(接口信息,可在页面直接请求测试接口,后台将自动记录操作日志可保存入库)
-格式:http://host:port/xxx/swagger-ui.html 
+> 格式:http://host:port/xxx/swagger-ui.html 
 ```
 http://localhost:8080/swagger-ui.html
 ```
+模拟登入后,选择不同接口测试，输入请求参数，点击"Try it out"，后台模拟入库对应操作日志。
+
 3. 接口的swagger描述信息json格式,用于导入mock系统
-http://{服务启动主机地址}:{服务启动端口}/v2/api-docs?group={需要生成的api所属组name}
+> http://{主机地址}:{服务启动端口}/xxx/v2/api-docs?group={需要生成的api所属组name}
 ```
 http://localhost:8080/v2/api-docs?group=default
 ```

@@ -130,9 +130,9 @@
 				</executions>
 				<configuration>
 					<prefix>${rpm.prefix}</prefix><!-- tomcat目录  -->
-					<license>2018, wwww.quansucloud.com</license>
-					<distribution>quangsucloud</distribution>
-					<group>quangsucloud.com</group>
+					<license>2018, wwww.myron.com</license>
+					<distribution>myron</distribution>
+					<group>myron.com</group>
 					<packager>linrx</packager>
 					<version>${project.version}</version>
 					<autoRequires>true</autoRequires>

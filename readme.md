@@ -1,4 +1,33 @@
 # 说明
+### 技术说明
+- springboot 项目结构
+- swagger2 在线接口文档/支持markdown/confluence/html/json 格式接口文档下载
+- 通过aop方式整合swagger2接口注解, 使用swagger2定义的接口自动记录操作日志
+### 项目中使用 
+```java
+@Api(value = "/users", tags = "用户操作接口")
+@RestController
+@RequestMapping(value="/users")     
+public class UserController {
+
+    static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
+
+    @ApiOperation(value="获取用户列表", notes="")
+    @RequestMapping(value={""}, method=RequestMethod.GET)
+    public List<User> getUserList() {
+        List<User> r = new ArrayList<User>(users.values());
+        return r;
+    }
+
+    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
+    @RequestMapping(value="", method=RequestMethod.POST)
+    public String postUser(@RequestBody User user) {
+        users.put(user.getId(), user);
+        return "success";
+    }
+}
+```
 ### 启动
 运行: hello.Application 
 

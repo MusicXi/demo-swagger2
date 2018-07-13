@@ -14,7 +14,7 @@ http://{服务启动主机地址}:{服务启动端口}/v2/api-docs?group={需要
 ```
 http://localhost:8080/v2/api-docs?group=default
 ```
-4. 接口文档下载
+4. 支持多种格式接口文档下载,用于项目管理及前后端联调使用
 ```
 http://localhost:8080/swagger/markdown
 http://localhost:8080/swagger/confluence

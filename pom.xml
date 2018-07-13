@@ -115,6 +115,7 @@
 				</configuration>
 			</plugin>
 
+			<!--注意!!! windows 环境缺少linux的rpm命令,开发环境注掉下面插件，不用打rpm包 打jar就好 -->
 			<!-- 打包RPM包: mvn package -Dmaven.test.skip=true   -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

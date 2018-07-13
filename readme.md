@@ -1,5 +1,8 @@
 # 说明
-- 快速尝试
+### 启动
+运行: hello.Application 
+
+### 快速尝试
 1. 模拟登入(模拟登入后才能记录日志) 
 ```
 http://localhost:8080/login?name=User

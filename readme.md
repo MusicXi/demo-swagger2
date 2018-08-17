@@ -56,7 +56,6 @@ http://localhost:8080/swagger/asciidoc
 http://localhost:8080/swagger/json
 http://localhost:8080/swagger/html
 ```
-
 ### 相关文档
 1. [springboot/springmvc实现swagger2/及国际化](https://github.com/MusicXi/note/tree/master/java/third_lib/swagger2)
 

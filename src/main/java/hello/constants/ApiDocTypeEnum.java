@@ -7,8 +7,11 @@ import io.github.swagger2markup.markup.builder.MarkupLanguage;
  * Created by linrx1 on 2018/6/27.
  */
 public enum ApiDocTypeEnum {
+    /** markdown 文档类型*/
     MARKDOWN(MarkupLanguage.MARKDOWN, SwaggerConstants.DOC_ROOT_PATH + "/docs/markdown/generated/api_doc_markdown"),
+    /** confluence 文档类型*/
     CONFLUENCE(MarkupLanguage.CONFLUENCE_MARKUP, SwaggerConstants.DOC_ROOT_PATH + "/docs/confluence/generated/api_doc_confluence"),
+    /** asciidoc 文档类型*/
     ASCIIDOC(MarkupLanguage.ASCIIDOC, SwaggerConstants.DOC_ROOT_PATH + "/docs/asciidoc/generated/api_doc_asciidoc");
 
 

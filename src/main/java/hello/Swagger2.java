@@ -7,6 +7,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -26,11 +27,12 @@ public class Swagger2 {
     }
 
     private ApiInfo apiInfo() {
+        Contact contact = new Contact("MR.xxx","http://xxx.xxx.com/","xxxx@qq.com");
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs 并使用aop记录对于操作日志")
-                .description("更多Spring Boot相关文章请关注：http://blog.xxx.com/")
-                .termsOfServiceUrl("http://blog.xxx.com/")
-                .contact("程序猿xxx")
+                .description("更多Spring Boot相关文章请关注：http://xxx.xxx.com/")
+                .termsOfServiceUrl("http://xxx.xxx.com/")
+                .contact(contact)
                 .version("1.0")
                 .build();
     }

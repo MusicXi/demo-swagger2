@@ -59,11 +59,17 @@ public class Swagger2 {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("MR.xxx","http://xxx.xxx.com/","xxxx@qq.com");
+        Contact contact = new Contact("Myron","http://xxx.xxx.com/","xxxx@qq.com");
+        StringBuilder description = new StringBuilder();
+        description.append("查看json格式:<a target='_blank' href='./v2/api-docs'>api-docs</a> <br>")
+                .append("接口文档下载:<a href='./swagger/markdown'>markdown</a>  ")
+                .append("<a href='./swagger/confluence'>confluence</a>  ")
+                .append("<a href='./swagger/html'>html</a> ")
+                .append("<a href='./swagger/json'>json</a> ");
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs 并使用aop记录对于操作日志")
-                .description("更多Spring Boot相关文章请关注：http://xxx.xxx.com/")
-                .termsOfServiceUrl("http://xxx.xxx.com/")
+                .description(description.toString())
+//                .termsOfServiceUrl("http://xxx.xxx.com/")
                 .contact(contact)
                 .version("1.0")
                 .build();

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Api(value = "/users", tags = "用户操作接口")
 @RestController
 @RequestMapping(value="/users")
@@ -25,10 +27,10 @@ public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
-    @ApiOperation(value="获取用户列表", notes="")
+    @ApiOperation(value="获取用户列表", notes="对该方法的备注信息说明")
     @RequestMapping(value={""}, method=RequestMethod.GET)
-    public List<User> getUserList() {
-        List<User> r = new ArrayList<User>(users.values());
+    public List<User> getUserList(HttpServletRequest request) {
+         List<User> r = new ArrayList<User>(users.values());
         return r;
     }
 

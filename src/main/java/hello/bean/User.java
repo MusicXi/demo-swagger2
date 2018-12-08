@@ -1,5 +1,7 @@
 package hello.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id; // 工号
+	@ApiModelProperty(value="账号", example = "zhangsan")
 	private String username; // 账号
 	private String name; // 姓名
 	private String password; // 密码

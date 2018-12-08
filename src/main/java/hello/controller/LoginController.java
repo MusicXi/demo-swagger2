@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.*;
  * @author linrx1
  *
  */
-@Api(value = "/", tags = "登入接口")
+@Api(value = "登入接口", tags = "登入接口", description = "选择login方法模拟")
 @RestController
 public class LoginController {
 
-    private static final String template = "Hello, %s!";
+    private static final String template = "welcome! %s, login success!";
     private final AtomicLong counter = new AtomicLong();
 
     @ApiOperation(value="模拟用户登入", notes="get提交用户名")
     @RequestMapping(value="/login" ,method= RequestMethod.GET)
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name, HttpSession session) {
+    public Greeting greeting(@RequestParam(value="name", defaultValue="ZhangSan") String name, HttpSession session) {
     	// 模拟用户登入
     	User user = new User();
     	user.setUsername(name);

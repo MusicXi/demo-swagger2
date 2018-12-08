@@ -1,6 +1,5 @@
 package hello.controller;
 
-import hello.bean.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.map.HashedMap;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Map;
 
 /**
  * @Api 说明
@@ -33,9 +32,9 @@ public class TestController {
         result.put("Accept-Language", request.getHeader("Accept-Language"));
         result.put("x-access-token", request.getHeader("x-access-token"));
         result.put("request.getLocale()", request.getLocale());
+        result.put("request.getLocale().toLanguageTag()", request.getLocale().toLanguageTag());
         LOGGER.info("x-access-token:{}" , request.getHeader("x-access-token"));
         LOGGER.info("Accept-Language:{}" , request.getHeader("Accept-Language"));
-        LOGGER.info("Locale language is {} " , request.getLocale().toLanguageTag());
         return result;
     }
 

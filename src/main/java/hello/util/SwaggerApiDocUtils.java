@@ -85,6 +85,7 @@ public class SwaggerApiDocUtils {
      */
     public static ResponseEntity<InputStreamResource> downloadApiDocJson() throws Exception {
         Swagger swagger = readSwagger(SwaggerConstants.SWAGGER_URL);
+        System.out.println(JacksonUtils.obj2jsonIgnoreNullPretty(swagger));
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", SwaggerConstants.API_DOC_JSON));

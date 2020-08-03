@@ -41,6 +41,7 @@ http://localhost:8080/login?name=User
 ```
 http://localhost:8080/swagger-ui.html
 ```
+
 模拟登入后,选择不同接口测试，输入请求参数，点击"Try it out"，后台模拟入库对应操作日志。
 
 3. 接口的swagger描述信息json格式,用于导入mock系统

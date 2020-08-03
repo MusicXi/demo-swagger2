@@ -26,7 +26,7 @@ public class TestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
     @ApiOperation(value="说明该方法的作用和用途", notes="对该方法的备注信息说明")
-    @RequestMapping(value={"showRequestHeader"}, method=RequestMethod.GET)
+    @RequestMapping(value="showRequestHeader", method=RequestMethod.GET)
     public Map<String, Object> showRequestHeader(HttpServletRequest request) {
         Map<String, Object> result = new HashedMap();
         result.put("Accept-Language", request.getHeader("Accept-Language"));
@@ -39,7 +39,7 @@ public class TestController {
     }
 
     @ApiOperation(value="测试@RequestHeader", notes="对该方法的备注信息说明")
-    @RequestMapping(value={"testRequestHeader"}, method=RequestMethod.GET)
+    @RequestMapping(value="testRequestHeader", method=RequestMethod.GET)
     public Map<String, Object> testRequestHeader(@RequestHeader("Accept-Language") String language, HttpServletRequest request) {
         Map<String, Object> result = new LinkedMap();
         result.put("Accept-Language", language);

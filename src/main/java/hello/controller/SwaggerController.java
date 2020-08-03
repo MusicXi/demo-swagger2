@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.net.URISyntaxException;
 
 /**
  * swagger2 接口文档下载控制器

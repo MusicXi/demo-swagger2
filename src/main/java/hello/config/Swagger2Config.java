@@ -1,20 +1,24 @@
 package hello.config;
 
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
+import hello.constants.ErrorEnum;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.Parameter;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.paths.RelativePathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -22,6 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,7 +68,11 @@ public class Swagger2Config {
                 .groupName("测试接口")
                 .apiInfo(apiInfo())
                 .globalOperationParameters(this.buildHeaderParam())
-                //.useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET, this.buildGlobalResponseMessage())
+                .globalResponseMessage(RequestMethod.POST, this.buildGlobalResponseMessage())
+                .globalResponseMessage(RequestMethod.PUT, this.buildGlobalResponseMessage())
+                .globalResponseMessage(RequestMethod.DELETE, this.buildGlobalResponseMessage())
+                .useDefaultResponseMessages(true)
                 // swagger-ui.html界面发起请求添加前缀
                 .pathProvider(new RelativePathProvider(servletContext) {
                     @Override
@@ -120,6 +129,20 @@ public class Swagger2Config {
         pars.add(tokenParam);
         pars.add(languageParam);
         return pars;
+    }
+
+    private List<ResponseMessage> buildGlobalResponseMessage() {
+        //添加全局响应状态码
+        List<ResponseMessage> responseMessageList = new ArrayList<>();
+        Arrays.stream(ErrorEnum.values()).forEach(errorEnums -> {
+            responseMessageList.add(
+                    new ResponseMessageBuilder().code(errorEnums.getCode()).message("业务错误码:" + errorEnums.getCode() + ":" + errorEnums.getMessage()).responseModel(
+                            new ModelRef(errorEnums.getMessage())).build()
+            );
+        });
+
+        return responseMessageList;
+
     }
 
 

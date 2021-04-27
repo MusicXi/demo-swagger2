@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.bean.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -57,7 +58,7 @@ public class TestController {
     @PostMapping(value = "/upload", consumes = "multipart/*", headers = "content-type=multipart/form-data")
     @ApiOperation(value = "上传图片", notes = "上传图片", httpMethod = "POST")
     @ResponseBody
-    public Map<String, Object> upload(@ApiParam(value = "测试图片", required = true) MultipartFile file, @ApiParam(value = "测试图片2", required = true) MultipartFile file2) {
+    public Map<String, Object> upload(@ApiParam(value = "测试String", required = true) User ddd, @ApiParam(value = "测试图片", required = true) MultipartFile file, @ApiParam(value = "测试图片2", required = true) MultipartFile file2) {
         Map<String, Object> resultMap = new HashedMap();
         this.saveFile("test01", file, resultMap);
         this.saveFile("test02", file2, resultMap);
